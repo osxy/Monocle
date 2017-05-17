@@ -136,7 +136,7 @@
     text-align: center;
     background-color: rgba(100, 100, 100, 0.7);
     font-size: 10px;
-    margin: 32px 0 0 0;
+    margin: 0px 0 0 0; 	/* changed */
     padding: 0;
     color: white;
     width: 100%;
@@ -147,10 +147,30 @@
     position: absolute;
     left: -16px;
     top: -20px;
-    width: 32px;
+    width: 36px; 	/* changed */
+    height: 40px;	/* added */
     text-align: center;
     margin: 0;
     padding: 0;
+}
+
+.pokeimg { /* added */
+	height: 32px;
+	width: 36px;
+}
+
+.leaflet-marker-icon { /* added */
+	height: 32px;
+	width: 36px;
+	object-fit: contain;
+	object-position: bottom center;
+}
+
+.settings-icon { /* added */
+	height: 32px;
+	width: 32px;
+	object-fit: contain;
+	object-position: center right;
 }
 
 #settings>.page-header{

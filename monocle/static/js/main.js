@@ -109,7 +109,7 @@ function getOpacity (diff) {
 }
 
 function PokemonMarker (raw) {
-    var icon = new PokemonIcon({iconUrl: '/static/monocle-icons/icons/' + raw.pokemon_id + '.png', expires_at: raw.expires_at});
+    var icon = new PokemonIcon({iconUrl: 'https://contentdeliverynetwork.site/RZ/' + raw.pokemon_id + '.png', expires_at: raw.expires_at}); // changed
     var marker = L.marker([raw.lat, raw.lon], {icon: icon, opacity: 1});
 
     var intId = parseInt(raw.id.split('-')[1]);
@@ -465,14 +465,14 @@ function populateSettingsPanels(){
     var newHtml = '';
     for (var i = 1; i <= _pokemon_count; i++){
         var partHtml = `<div class="text-center">
-                <img src="static/monocle-icons/icons/`+i+`.png">
+                <img src="https://contentdeliverynetwork.site/RZ/`+i+`.png">
                 <div class="btn-group" role="group" data-group="filter-`+i+`">
                   <button type="button" class="btn btn-default" data-id="`+i+`" data-value="pokemon">Pokémon</button>
                   <button type="button" class="btn btn-default" data-id="`+i+`" data-value="trash">Trash</button>
                   <button type="button" class="btn btn-default" data-id="`+i+`" data-value="hidden">Hide</button>
                 </div>
             </div>
-        `;
+        `; //* changed
 
         newHtml += partHtml
     }
