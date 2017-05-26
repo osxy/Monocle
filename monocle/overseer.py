@@ -94,9 +94,30 @@ class Overseer:
         LOOP.call_later(10, self.update_count)
         LOOP.call_later(max(conf.SWAP_OLDEST, conf.MINIMUM_RUNTIME), self.swap_oldest)
         LOOP.call_soon(self.update_stats)
+        self.update_levels()
         if status_bar:
             LOOP.call_soon(self.print_status)
 
+
+    def update_levels(self):
+        self.levels = []
+        for username, account in ACCOUNTS.items():
+            if 'level' in account:
+                self.levels += [account['level']]
+        if len(self.levels):
+            self.levels.sort() 
+            self.highest_level = self.levels[len(self.levels)-1]
+            self.lowest_level = self.levels[0]
+            self.average_level = round(sum(self.levels) / len(self.levels))
+        else:
+            self.highest_level = 'N/A'
+            self.lowest_level = 'N/A'
+            self.average_level = 'N/A'
+		
+        LOOP.call_later(600, self.update_levels) # 10 minute interval
+
+
+				
     def update_count(self):
         self.things_count.append(str(db_proc.count))
         self.pokemon_found = (
@@ -238,7 +259,7 @@ class Overseer:
         hours_since_start = seconds_since_start / 3600
 
         output = [
-            '{}Monocle running for {}'.format(_ansi, running_for),
+            '{}Monocle running for {} {}'.format(_ansi, running_for, conf.AREA_NAME),
             self.counts,
             self.stats,
             self.pokemon_found,
@@ -277,7 +298,10 @@ class Overseer:
             sent = Worker.notifier.sent
             output.append('Notifications sent: {}, per hour {:.1f}'.format(
                 sent, sent / hours_since_start))
-
+				
+				output.append('Highest level: {}, lowest level: {}, average level: {}'.format(
+            self.highest_level, self.lowest_level, self.average_level))
+            
         output.append('')
         if not self.all_seen:
             no_sightings = ', '.join(str(w.worker_no)
