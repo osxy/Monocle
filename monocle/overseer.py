@@ -299,8 +299,8 @@ class Overseer:
             output.append('Notifications sent: {}, per hour {:.1f}'.format(
                 sent, sent / hours_since_start))
 				
-				output.append('Highest level: {}, lowest level: {}, average level: {}'.format(
-								self.highest_level, self.lowest_level, self.average_level))
+        output.append('Highest level: {}, lowest level: {}, average level: {}'.format(
+            self.highest_level, self.lowest_level, self.average_level))
             
         output.append('')
         if not self.all_seen:
