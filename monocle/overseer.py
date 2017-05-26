@@ -300,7 +300,7 @@ class Overseer:
                 sent, sent / hours_since_start))
 				
 				output.append('Highest level: {}, lowest level: {}, average level: {}'.format(
-            self.highest_level, self.lowest_level, self.average_level))
+								self.highest_level, self.lowest_level, self.average_level))
             
         output.append('')
         if not self.all_seen:
